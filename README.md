@@ -6,6 +6,8 @@
 This guide covers how to build, pull, run, and use the Bioinformatics
 Docker environment with Python 3.10, R 4.6, and JupyterLab.
 
+### [web version](https://mtinti.github.io/cryptosporidium_host_adaptation/)
+
 ## Contents
 
 - [Prerequisites](#prerequisites)
@@ -63,7 +65,8 @@ docker run -p 8888:8888 -v $(pwd):/app --rm biojupyter
 
 This command: - Maps port 8888 of the container to port 8888 on your
 host - Mounts your current directory to `/app` in the container -
-Automatically removes the container when stopped (`--rm`)
+Automatically removes the container when stopped (`--rm`) \> Note: The
+environment is configured with no password or token for simplicity.
 
 ### Access JupyterLab
 
@@ -83,12 +86,10 @@ cd biojupyter
 docker run -p 8888:8888 -v $(pwd):/app --rm biojupyter
 ```
 
-You can open and run the included test.ipynb notebook to verify that
-rpy2 is working correctly. This notebook demonstrates calling R
-functions from Python and passing data between the two languages.
-
-Note: The environment is configured with no password or token for
-simplicity.
+- You can open and run the included nbs/00_test.ipynb notebook to verify
+  that rpy2 is working correctly.
+- This notebook demonstrates calling R functions from Python and passing
+  data between the two languages.
 
 ### With Custom Port
 
