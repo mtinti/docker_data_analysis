@@ -6,7 +6,7 @@
 This guide covers how to build, pull, run, and use the Bioinformatics
 Docker environment with Python 3.10, R 4.6, and JupyterLab.
 
-### [web version](https://mtinti.github.io/cryptosporidium_host_adaptation/)
+### [web version](https://mtinti.github.io/docker_data_analysis/)
 
 ## Contents
 
