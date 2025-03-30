@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "docker_data_analysis"
+  site-url: "https://mtinti.github.io/docker_data_analysis"
+  description: "A Docker-based environment with my bioinformatics stack"
+  repo-branch: main
+  repo-url: "https://github.com/mtinti/docker_data_analysis"
