@@ -68,6 +68,14 @@ host - Mounts your current directory to `/app` in the container -
 Automatically removes the container when stopped (`--rm`) \> Note: The
 environment is configured with no password or token for simplicity.
 
+Running with git credential:
+
+``` bash
+docker run -p 8889:8888 -v $(pwd):/app -v ~/.gitconfig:/etc/gitconfig -v /path/to/.ssh/id_rsa:/root/.ssh/id_rsa --rm mtinti/biojupyter:latest
+#
+git remote set-url origin git@github.com:path/to_repo.git
+```
+
 ### Access JupyterLab
 
 Once running, access JupyterLab by opening a web browser and navigating
