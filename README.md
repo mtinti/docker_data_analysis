@@ -60,7 +60,7 @@ docker pull mtinti/biojupyter:latest
 Start JupyterLab server:
 
 ``` bash
-docker run -p 8888:8888 -v $(pwd):/app --rm mtinti/biojupyter
+docker run -p {8888 or you favorite port}:8888 -v $(pwd):/app --rm mtinti/biojupyter
 ```
 
 This command: - Maps port 8888 of the container to port 8888 on your
@@ -71,7 +71,7 @@ environment is configured with no password or token for simplicity.
 Running with git credential:
 
 ``` bash
-docker run -p 8889:8888 -v $(pwd):/app -v ~/.gitconfig:/etc/gitconfig -v /path/to/.ssh/id_rsa:/root/.ssh/id_rsa --rm mtinti/biojupyter:latest
+docker run -p 8888:8888 -v $(pwd):/app -v ~/.gitconfig:/etc/gitconfig -v /path/to/.ssh/id_rsa:/root/.ssh/id_rsa --rm mtinti/biojupyter:latest
 #
 git remote set-url origin git@github.com:path/to_repo.git
 ```
