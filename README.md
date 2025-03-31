@@ -60,7 +60,7 @@ docker pull mtinti/biojupyter:latest
 Start JupyterLab server:
 
 ``` bash
-docker run -p 8888:8888 -v $(pwd):/app --rm biojupyter
+docker run -p 8888:8888 -v $(pwd):/app --rm mtinti/biojupyter
 ```
 
 This command: - Maps port 8888 of the container to port 8888 on your
