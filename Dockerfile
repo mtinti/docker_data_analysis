@@ -75,7 +75,6 @@ RUN source /opt/venv/bin/activate && \
     vcfpy \
     scipy \
     PyYAML \
-    ProjectUtility \
     polars \
     plotly \
     'plotly[express]' \
@@ -122,13 +121,18 @@ RUN source /opt/venv/bin/activate && \
     pip install --no-cache-dir \    
     git+https://github.com/AnswerDotAI/fasttransform.git 
 
-# Install system dependencies including Python 3.10, samtools, bcftools
 RUN apt-get update && apt-get install -y \
     libmagickwand-dev
     
 RUN source /opt/venv/bin/activate && \
     pip install --no-cache-dir \
     Wand
+
+RUN R -e "try(install.packages(c('doParallel'), repos='http://cran.rstudio.com/'))" 
+
+RUN source /opt/venv/bin/activate && \
+    pip install --no-cache-dir \
+    git+https://github.com/mtinti/ProjectUtility.git
     
 # Expose the port JupyterLab will run on
 EXPOSE 8888
