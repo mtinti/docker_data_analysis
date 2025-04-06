@@ -165,9 +165,3 @@ EXPOSE 8888
 
 # Set up the entrypoint to activate the virtual environment and start Jupyter
 CMD source /opt/venv/bin/activate && jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root --NotebookApp.token="" --NotebookApp.password=""
-
-# docker build -t biojupyter .
-# start jupyter lab
-# docker run -p 8888:8888 -v $(pwd):/app --rm biojupyter
-# run a shell
-# docker run -it --rm -v $(pwd):/app --entrypoint /bin/bash biojupyter -c "source /opt/venv/bin/activate && exec bash"

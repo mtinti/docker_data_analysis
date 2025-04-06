@@ -139,3 +139,9 @@ When accessing the shell, activate the Python virtual environment:
 ``` bash
 source /opt/venv/bin/activate
 ```
+
+### One liner
+
+``` bash
+docker run -it --rm -v $(pwd):/app --entrypoint /bin/bash biojupyter -c "source /opt/venv/bin/activate && exec bash"
+```
