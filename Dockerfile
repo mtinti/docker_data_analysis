@@ -155,7 +155,6 @@ RUN source /opt/venv/bin/activate && \
 RUN source /opt/venv/bin/activate && \
     nbdev_install_quarto
 
-
 RUN source /opt/venv/bin/activate && \
     jupyter lab build --minimize=False && \
     npm cache clean --force && \
@@ -164,6 +163,10 @@ RUN source /opt/venv/bin/activate && \
 
 # Expose the port JupyterLab will run on
 EXPOSE 8888
+EXPOSE 8944
+EXPOSE 8945
+EXPOSE 8946
+EXPOSE 8947
 
 # Set up the entrypoint to activate the virtual environment and start Jupyter
 CMD source /opt/venv/bin/activate && jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root --NotebookApp.token="" --NotebookApp.password=""

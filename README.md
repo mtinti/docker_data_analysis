@@ -140,8 +140,11 @@ When accessing the shell, activate the Python virtual environment:
 source /opt/venv/bin/activate
 ```
 
-### One liner
+### nbdev
+
+> I use this contener to develop with nbdev, if you want to see the
+> website preview use
 
 ``` bash
-docker run -it --rm -v $(pwd):/app --entrypoint /bin/bash biojupyter -c "source /opt/venv/bin/activate && exec bash"
+nbdev_preview --host 0.0.0.0 --port 8944
 ```
