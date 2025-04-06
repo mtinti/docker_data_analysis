@@ -142,7 +142,7 @@ source /opt/venv/bin/activate
 
 ### nbdev
 
-> I use this contener to develop with nbdev, if you want to see the
+> I use this container to develop with nbdev, if you want to see the
 > website preview use
 
 ``` bash
