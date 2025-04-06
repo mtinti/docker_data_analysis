@@ -68,11 +68,8 @@ SHELL ["/bin/bash", "-c"]
 # Install packages into the virtual environment explicitly
 RUN source /opt/venv/bin/activate && \
     pip install --no-cache-dir \
-    git+https://github.com/AnswerDotAI/fastcore.git \
-    git+https://github.com/AnswerDotAI/fasttransform.git \
     git+https://github.com/openvax/gtfparse.git \    
     jupyterlab \
-    nbdev \
     matplotlib \
     scikit-learn \
     biopython \
@@ -116,7 +113,6 @@ RUN source /opt/venv/bin/activate && \
     'scanpy[leiden]'
 
 RUN source /opt/venv/bin/activate && \
-    nbdev_install_quarto && \
     python -m ipykernel install --name py310 --display-name "Python 3.10 (venv)"
 
 # Install R 4 from CRAN repository instead of default Ubuntu packages
@@ -151,7 +147,13 @@ RUN source /opt/venv/bin/activate && \
     pip install --no-cache-dir \
     git+https://github.com/mtinti/ProjectUtility.git \
     git+https://github.com/mtinti/OligoSeeker.git \
-    git+https://github.com/mtinti/BarcodeSeqKit.git
+    git+https://github.com/mtinti/BarcodeSeqKit.git \
+    git+https://github.com/AnswerDotAI/fastcore.git \
+    git+https://github.com/AnswerDotAI/fasttransform.git \
+    nbdev
+
+RUN source /opt/venv/bin/activate && \
+    nbdev_install_quarto
 
 
 RUN source /opt/venv/bin/activate && \
