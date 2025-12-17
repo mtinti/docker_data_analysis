@@ -180,6 +180,22 @@ RUN source /opt/venv/bin/activate && \
     pyCirclize  \
     svist4get 
 
+ RUN source /opt/venv/bin/activate && \
+    pip install --no-cache-dir \
+    snakemake  
+
+# Install Miniforge
+RUN wget -q https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -O /tmp/miniforge.sh && \
+    bash /tmp/miniforge.sh -b -p /opt/miniforge3 && \
+    rm /tmp/miniforge.sh && \
+    /opt/miniforge3/bin/conda init bash && \
+    /opt/miniforge3/bin/conda config --set auto_activate_base false && \
+    /opt/miniforge3/bin/conda clean -afy
+
+# Add conda to PATH for all users
+ENV PATH="/opt/miniforge3/bin:$PATH"
+
+
 # Expose the ports JupyterLab will run on
 EXPOSE 8888 8944 8945 8946 8947
 
