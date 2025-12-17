@@ -1,0 +1,92 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Bioinformatics Docker Environment: User Guide",
+    "section": "",
+    "text": "This guide covers how to build, pull, run, and use the Bioinformatics Docker environment with Python 3.10, R 4.6, and JupyterLab.",
+    "crumbs": [
+      "Bioinformatics Docker Environment: User Guide"
+    ]
+  },
+  {
+    "objectID": "index.html#contents",
+    "href": "index.html#contents",
+    "title": "Bioinformatics Docker Environment: User Guide",
+    "section": "Contents",
+    "text": "Contents\n\nPrerequisites\nBuilding the Image\nPulling the Image\nRunning JupyterLab\nWorking with the Environment\nAdvanced Usage",
+    "crumbs": [
+      "Bioinformatics Docker Environment: User Guide"
+    ]
+  },
+  {
+    "objectID": "index.html#prerequisites",
+    "href": "index.html#prerequisites",
+    "title": "Bioinformatics Docker Environment: User Guide",
+    "section": "Prerequisites",
+    "text": "Prerequisites\n\nDocker installed on your machine\nInternet connection for pulling dependencies\n(Optional) Docker Hub account for pushing/pulling the image",
+    "crumbs": [
+      "Bioinformatics Docker Environment: User Guide"
+    ]
+  },
+  {
+    "objectID": "index.html#building-the-image",
+    "href": "index.html#building-the-image",
+    "title": "Bioinformatics Docker Environment: User Guide",
+    "section": "Building the Image",
+    "text": "Building the Image\n\nOption 1: Build from Dockerfile\n\nClone the repository containing the Dockerfile:\ngit clone https://github.com/mtinti/biojupyter.git\ncd biojupyter\nBuild the Docker image:\ndocker build -t biojupyter .\nThis process may take 15-30 minutes depending on your internet speed and machine capabilities.",
+    "crumbs": [
+      "Bioinformatics Docker Environment: User Guide"
+    ]
+  },
+  {
+    "objectID": "index.html#pulling-the-image",
+    "href": "index.html#pulling-the-image",
+    "title": "Bioinformatics Docker Environment: User Guide",
+    "section": "Pulling the Image",
+    "text": "Pulling the Image\nIf the image is already available on Docker Hub:\n# Pull the latest version\ndocker pull mtinti/biojupyter:latest",
+    "crumbs": [
+      "Bioinformatics Docker Environment: User Guide"
+    ]
+  },
+  {
+    "objectID": "index.html#running-jupyterlab",
+    "href": "index.html#running-jupyterlab",
+    "title": "Bioinformatics Docker Environment: User Guide",
+    "section": "Running JupyterLab",
+    "text": "Running JupyterLab\n\nBasic Usage\nStart JupyterLab server:\ndocker run -p {8888 or you favorite port}:8888 -v $(pwd):/app --rm mtinti/biojupyter\nThis command: - Maps port 8888 of the container to port 8888 on your host - Mounts your current directory to /app in the container - Automatically removes the container when stopped (--rm) &gt; Note: The environment is configured with no password or token for simplicity.\nRunning with git credential:\ndocker run -p 8888:8888 -v $(pwd):/app -v ~/.gitconfig:/etc/gitconfig -v /path/to/.ssh/id_rsa:/root/.ssh/id_rsa --rm mtinti/biojupyter:latest\n#\ngit remote set-url origin git@github.com:path/to_repo.git\n\n\nAccess JupyterLab\nOnce running, access JupyterLab by opening a web browser and navigating to:\nhttp://localhost:8888\n\n\nTesting rpy2 Functionality\nIf you clone the repository and start the container from inside the repo directory:\ngit clone https://github.com/mtinti/biojupyter.git\ncd biojupyter\ndocker run -p 8888:8888 -v $(pwd):/app --rm biojupyter\n\nYou can open and run the included nbs/00_test.ipynb notebook to verify that rpy2 is working correctly.\nThis notebook demonstrates calling R functions from Python and passing data between the two languages.\n\n\n\nWith Custom Port\nIf port 8888 is already in use on your machine:\ndocker run -p 9999:8888 -v $(pwd):/app --rm biojupyter\nThen access JupyterLab at http://localhost:9999",
+    "crumbs": [
+      "Bioinformatics Docker Environment: User Guide"
+    ]
+  },
+  {
+    "objectID": "index.html#working-with-the-environment",
+    "href": "index.html#working-with-the-environment",
+    "title": "Bioinformatics Docker Environment: User Guide",
+    "section": "Working with the Environment",
+    "text": "Working with the Environment\n\nAvailable Kernels\nThis environment provides two Jupyter kernels: - Python 3.10 (venv): Python kernel with all the bioinformatics packages installed - R: R 4.6 kernel with Bioconductor packages\n\n\nAccessing Files\nFiles in your current directory (where you run the docker run command) are accessible within JupyterLab under the /app directory.",
+    "crumbs": [
+      "Bioinformatics Docker Environment: User Guide"
+    ]
+  },
+  {
+    "objectID": "index.html#advanced-usage",
+    "href": "index.html#advanced-usage",
+    "title": "Bioinformatics Docker Environment: User Guide",
+    "section": "Advanced Usage",
+    "text": "Advanced Usage\n\nInteractive Shell Access\nTo access a bash shell within the container:\ndocker run -it --rm --entrypoint /bin/bash biojupyter\n\n\nActivate Python Environment Inside Container\nWhen accessing the shell, activate the Python virtual environment:\nsource /opt/venv/bin/activate\n\n\nnbdev\n\nI use this container to develop with nbdev, if you want to see the website preview use\n\nnbdev_preview --host 0.0.0.0 --port 8944",
+    "crumbs": [
+      "Bioinformatics Docker Environment: User Guide"
+    ]
+  },
+  {
+    "objectID": "tests.html",
+    "href": "tests.html",
+    "title": "Testing R-Python Integration",
+    "section": "",
+    "text": "#reload when modified\n\n\nimport pandas as pd\nfrom IPython.display import Image, display\nimport os\nimport re\nimport tqdm\n\n\nimport svist4get as sv4g\n\n\nimport os\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n#import utilities as UT\nimport missingno as msno\nimport random\nimport matplotlib.pyplot as plt\nimport matplotlib.patches as patches\nimport gc\nfrom io import StringIO\nfrom itertools import islice\nfrom Bio import SeqIO\n\nrandom.seed(1976)\nnp.random.seed(1976)\n\n\nimport multiprocessing\nmultiprocessing.cpu_count()\n\n12\n\n\n\nimport pandas as pd\nimport numpy as np\n\n# Set random seed for reproducibility\nnp.random.seed(42)\n# Create a DataFrame with 6 columns and 100 rows of random values\ndf = pd.DataFrame({\n    'A': np.random.randint(0, 1000, size=100),\n    'B': np.random.randint(0, 1000, size=100),\n    'C': np.random.randint(0, 1000, size=100),\n    'D': np.random.randint(0, 1000, size=100),\n    'E': np.random.randint(0, 1000, size=100),\n    'F': np.random.randint(0, 1000, size=100),\n})\n\n# Display the first few rows\nprint(df.shape)\ndf.head()\n\n(100, 6)\n\n\n\n\n\n\n\n\n\nA\nB\nC\nD\nE\nF\n\n\n\n\n0\n102\n555\n899\n709\n472\n322\n\n\n1\n435\n161\n733\n415\n98\n871\n\n\n2\n860\n201\n484\n246\n152\n685\n\n\n3\n270\n957\n406\n835\n860\n791\n\n\n4\n106\n995\n230\n438\n913\n625\n\n\n\n\n\n\n\n\noptions(warn=-1)\nlibrary(\"limma\") \nlibrary(\"edgeR\")\nlibrary(\"cqn\")\nlibrary(\"scales\")\nhead(df)\n\n    A   B   C   D   E   F\n0 102 555 899 709 472 322\n1 435 161 733 415  98 871\n2 860 201 484 246 152 685\n3 270 957 406 835 860 791\n4 106 995 230 438 913 625\n5  71 269 748 202 895 287\n\n\n\ngroup &lt;- factor(c(\n    'A','A','A','B','B','B'\n))\n\ny &lt;- DGEList(counts=df, group=group)\nkeep &lt;- filterByExpr(y, min.count = 100, min.total.count = 2000)\ny &lt;- y[keep,,keep.lib.sizes=FALSE]\ncounts = y$counts\ngenes = row.names(y)\n\n\nindata = pd.DataFrame(counts, index=genes,columns=df.columns)\nindata.shape\n\n(95, 6)\n\n\n\n#https://rstudio-pubs-static.s3.amazonaws.com/79395_b07ae39ce8124a5c873bd46d6075c137.html\nlibrary(edgeR)\n# Make groups\ndesign_with_all &lt;- model.matrix( ~0+group )\n\ny &lt;- DGEList(counts=indata, \n                  group = group, \n                  )\n# Estimate dispersion\ny &lt;- estimateGLMCommonDisp( y, design_with_all )\ny &lt;- estimateGLMTrendedDisp( y, design_with_all )\ny &lt;- estimateGLMTagwiseDisp( y, design_with_all )\n# Fit counts to model\nfit_all &lt;- glmQLFit( y, design_with_all )\n\n\ncontrast &lt;- glmQLFTest(fit_all, contrast=makeContrasts( groupA-groupB, levels=design_with_all ) )\ntable &lt;- topTags(contrast, n=Inf, sort.by = \"none\", adjust.method=\"BH\")$table\nhead(table)\n\n        logFC   logCPM           F    PValue       FDR\n0  0.06557184 13.34298 0.005041796 0.9443735 0.9720116\n1  0.04093098 13.14642 0.001779103 0.9669370 0.9720116\n2  0.63822136 13.12779 0.463060552 0.5070295 0.9720116\n3 -0.55146249 13.77109 0.776125452 0.3928463 0.9720116\n4 -0.51958511 13.45730 0.310887813 0.5857299 0.9720116\n5 -0.34783483 13.03854 0.114259640 0.7402404 0.9720116\n\n\n\nfig,axes=plt.subplots(ncols=1,nrows=1,figsize=(6,3))\ntable.PValue.plot(kind='hist',bins=50,ax=axes)\nplt.suptitle('pvalues distribution')\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\n\nimport panel as pn\nimport holoviews as hv\nimport numpy as np\n\n# Initialize panel and holoviews\npn.extension()\nhv.extension('bokeh')\n\n# Generate some data\nx = np.arange(10)\ny = np.random.rand(10)\n\n# Create a scatter plot\nscatter = hv.Scatter((x, y)).opts(\n    width=400, height=300, \n    tools=['hover', 'tap'],\n    size=10, \n    color='blue',\n    title='Click on points to see data'\n)\n\n# Create a tap stream connected to our scatter plot\ntap = hv.streams.Tap(source=scatter)\n\n# Create a DynamicMap that updates with tap events\ndef tap_info(x, y):\n    if x is None or y is None:\n        return hv.Div('Click on a point')\n    return hv.Div(f'Clicked point at x={x:.2f}, y={y:.4f}')\n\ntap_display = hv.DynamicMap(tap_info, streams=[tap])\n\n# Create layout and serve\nlayout = pn.Column(\n    pn.pane.HoloViews(scatter),\n    pn.pane.HoloViews(tap_display)\n)\n\n# Serve the application\nlayout.servable()",
+    "crumbs": [
+      "Testing R-Python Integration"
+    ]
+  }
+]
